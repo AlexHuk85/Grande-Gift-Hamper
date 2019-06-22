@@ -1,0 +1,68 @@
+﻿@model TafeGrandeGift.Models.Hamper
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<h2>Are you sure you want to delete this hamper?</h2>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HamperName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HamperName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HamperPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HamperPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HamperDetail)
+        </dt>
+
+        <dd style="white-space: pre-line">@Model.HamperDetail</dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.ContentType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContentType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FileName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FileName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FileContent)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FileContent)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContentSize)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContentSize)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryId)
+        </dd>*@
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="HamperId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

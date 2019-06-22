@@ -1,0 +1,84 @@
+﻿@model TafeGrandeGift.Models.OrderViewModel.OrderIndexViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="@Model.UserName" class="control-label"></label>
+                <input asp-for="@Model.UserName" class="form-control" disabled />
+                <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Address</label>
+                <select name="AddressId" class="form-control">
+                    @foreach (var address in Model.Addresses)
+                    {
+
+                        <option value="@address.UserAddressId">@address.Address</option>
+
+                    }
+                </select>
+                <span class="text-danger"></span>
+                @*<a asp-controller="Manage" asp-action="DisplayAddress">Add your address here</a>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.OrderDate" class="control-label"></label>
+                <input asp-for="@Model.OrderDate" class="form-control" disabled />
+                <span asp-validation-for="@Model.OrderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Total" class="control-label"></label>
+                <input asp-for="@Model.Total" class="form-control" disabled name="Total"/>
+                <span asp-validation-for="@Model.Total" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span>Total + Shipping ($7.50)</span>
+                <input asp-for="@Model.TotalWithShipping" class="form-control" disabled name="TotalWithShipping"/>
+                <span asp-validation-for="@Model.TotalWithShipping" class="text-danger"></span>
+            </div>
+            <table class="table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CartItems)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Price)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Hamper.HamperName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Hamper.HamperPrice)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Hampers" asp-action="Index">Back to List</a>
+</div>
+

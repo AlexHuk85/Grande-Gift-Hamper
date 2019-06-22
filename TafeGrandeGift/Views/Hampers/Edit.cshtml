@@ -1,0 +1,95 @@
+﻿@model TafeGrandeGift.Models.HamperViewModels.HamperEditViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit Hamper Page</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="HamperId" />
+            <div class="form-group">
+                <label asp-for="HamperName" class="control-label"></label>
+                <input asp-for="HamperName" class="form-control" />
+                <span asp-validation-for="HamperName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HamperPrice" class="control-label"></label>
+                <input asp-for="HamperPrice" class="form-control" />
+                <span asp-validation-for="HamperPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Category Name</label>
+                <select name="CategoryId" class="form-control">
+                    @foreach (var item in Model.CategoriesList)
+
+                    {
+                        @if (item.CategoryId == Model.CategoryId)
+                        {
+                            <option value="@item.CategoryId" selected>@item.CategoryName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.CategoryId">@item.CategoryName</option>
+                        }
+
+                    }
+                </select>
+                <span class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="HamperDetail" class="control-label"></label>
+                <textarea data-val="true"
+                          data-val-maxlength-max="5000"
+                          id="HamperDetail"
+                          name="HamperDetail"
+                          class="form-control"
+                          style="height:300px"
+                          asp-for="HamperDetail"></textarea>
+            </div>
+            @*<table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Product Name
+                        </th>
+                        <th>
+                            Qty
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ProductList)
+                    {
+                        <tr>
+                            <td>
+                                <input name="Selected" type="checkbox" value="@item.ProductId" />
+                                <label asp-for="@Model.ProductId">@item.ProductName</label>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductQty)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>*@
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

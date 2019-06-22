@@ -1,0 +1,44 @@
+﻿@model TafeGrandeGift.Models.HamperViewModels.HamperDetailViewModel
+
+@{
+    ViewData["Title"] = "RestoreDetail";
+}
+
+<h2>RestoreDetail</h2>
+<form asp-action="RestoreDetail">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div>
+        <h4>Hamper</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.HamperName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.HamperName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsRemove)
+            </dt>
+            <dd>
+
+                <select name="@Model.IsRemove">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </dd>
+
+        </dl>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

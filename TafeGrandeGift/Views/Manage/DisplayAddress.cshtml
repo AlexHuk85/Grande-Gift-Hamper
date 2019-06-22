@@ -1,0 +1,37 @@
+﻿@model UserAddressViewModel
+@{
+    ViewData["Title"] = "Your Address";
+}
+
+<h2>Your Address</h2>
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            @foreach (var item in Model.UserAddressList)
+            {
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+
+                    <input asp-for="@item.Address" class="form-control" disabled />
+                    <a asp-action="EditAddress" asp-route-id="@item.UserAddressId" style="margin-right:5px">Edit</a>
+                    <a asp-action="DeleteAddress" asp-route-id="@item.UserAddressId" asp-for="UserID">Delete</a>
+                </div>
+            }
+
+
+            <div class="form-group">
+                <label asp-for="NewAddress"></label>
+                <input asp-for="NewAddress" class="form-control" />
+                <span asp-validation-for="NewAddress" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

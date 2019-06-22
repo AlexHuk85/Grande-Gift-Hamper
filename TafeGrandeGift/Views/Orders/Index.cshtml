@@ -1,0 +1,66 @@
+﻿@model TafeGrandeGift.Models.OrderViewModel.OrderIndexViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>@Model.UserName, Here is Your Order History </h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order Date</th>
+            <th>Ship To</th>
+            <th>Item(s)</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Orders)
+        {
+            <tr>
+                <td>@item.OrderDate</td>
+                <td>@item.UserAddress</td>
+                <td>
+                    @foreach (var i in Model.OrderHampers)
+                    {
+                        @if (item.OrderId == i.OrderId)
+                        {
+                            <li>@i.HamperName</li>
+                        }
+
+                    }
+                </td>
+                <td>@item.TotalWithShipping</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*<dl class="dl-horizontal">
+    @foreach (var item in Model.Orders)
+    {
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.OrderDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => item.OrderDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(modelItem => item.UserAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => item.UserAddress)
+        </dd>
+    }
+
+
+</dl>*@
+
+

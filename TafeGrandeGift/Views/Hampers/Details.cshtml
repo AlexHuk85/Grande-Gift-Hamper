@@ -1,0 +1,101 @@
+﻿@model TafeGrandeGift.Models.HamperViewModels.HamperDetailViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+<h2>Hamper Details</h2>
+<form asp-action="Post" enctype="multipart/form-data">
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            @{
+                var base64 = Convert.ToBase64String(Model.FileContent);
+                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+            }
+            <dt>
+                @Html.DisplayNameFor(model => model.FileContent)
+            </dt>
+            <dd>
+                <img src="@imgSrc" style="width:400px;height:400px;border:0;" />
+            </dd>
+            <br />
+            <dt>
+                @Html.DisplayNameFor(model => model.HamperName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.HamperName)
+            </dd>
+            <br />
+            <dt>
+                @Html.DisplayNameFor(model => model.HamperPrice)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.HamperPrice)
+            </dd>
+            <br />
+            <dt>
+                @Html.DisplayNameFor(model => model.Category)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Category)
+            </dd>
+            <br />
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </dt>
+            <dd style="white-space: pre-line">@Model.HamperDetail</dd>
+            <br />
+            <dt></dt>
+            <dd><button asp-controller="Cart" asp-action="Buy" asp-route-id="@Model.HamperId">Buy Now</button></dd>
+        </dl>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="col-md-3">
+            <textarea data-val="true"
+                      placeholder="Give us your comment here!"
+                      data-val-maxlength-max="100"
+                      id="UserFeedback"
+                      name="UserFeedback"
+                      class="form-control"
+                      style="height:50px;margin-left:150px"></textarea>
+            <input type="submit"
+                   value="Give Feedback"
+                   class="btn btn-default"
+                   asp-action="Feedback"
+                   asp-route-id="@Model.HamperId"
+                   style="margin-top:10px; margin-left:150px" />
+        </div>
+
+</form>
+
+        
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.UserFeedBack)
+            {
+                <tr>
+                    <td>@item.UserName</td>
+                    <td>@item.UserFeedBack</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model.HamperId">Edit</a>
+        }
+    }
+    <a asp-action="Index">Back to List</a>
+</div>

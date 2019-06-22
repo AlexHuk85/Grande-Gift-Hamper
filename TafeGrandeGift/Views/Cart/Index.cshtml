@@ -1,0 +1,48 @@
+﻿@model TafeGrandeGift.Models.CartItem
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div style="padding-top:15px">
+    <h4>Item in your shopping cart</h4>
+    <hr />
+    <table class="table" style="width:70%">
+        <tr>
+
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Sub Total</th>
+            <th>Option</th>
+        </tr>
+        @foreach (var item in ViewBag.cart)
+        {
+            <tr>
+
+                <td>@item.Hamper.HamperId</td>
+                <td>@item.Hamper.HamperName</td>
+                <td>@item.Hamper.HamperPrice</td>
+                <td>@item.Quantity</td>
+                <td>@(item.Hamper.HamperPrice * item.Quantity)</td>
+                <td><form><a asp-controller="Cart" asp-action="Remove" asp-route-id="@item.Hamper.HamperId">Remove</a></form></td>
+            </tr>
+        }
+        <tr>
+            <td align="right" colspan="4">Sum</td>
+            <td>
+                @ViewBag.total
+            </td>
+        </tr>
+    </table>
+    <form>
+        <button asp-controller="Orders" asp-action="Create">Check Out</button>
+       </form>
+</div>
+<br />
+<div>
+    
+    <a asp-controller="Hampers" asp-action="Index">Back to List</a>
+</div>

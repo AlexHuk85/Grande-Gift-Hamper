@@ -1,0 +1,47 @@
+﻿@model TafeGrandeGift.Models.HamperViewModels.HamperIndexViewModel
+
+@{
+    ViewData["Title"] = "RestoreIndex";
+}
+
+<h2>Restore Page</h2>
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.HamperName)
+                </th>
+
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Hampers)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HamperName)
+                    </td>
+
+                    @*<td>
+                        <select name="@item.IsRemove">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </td>*@
+                    <td>
+                        <a asp-action="RestoreDetail" asp-route-id="@item.HamperId">Details</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
